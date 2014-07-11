@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import wx
 import finch 
+import kinematics as kn
 
 WINDOW_WIDTH=400
 WINDOW_HEIGHT=300
@@ -67,9 +68,15 @@ class MainWindow(wx.Frame):
         elif obj == self.stopManButton:
             f.wheels(0,0)
         elif obj== self.rotLButton:
-            f.wheels(-0.3,0.3)
+            omega=2.5
+            vl,vr = kn.getLRVel(0, omega,kn.FINCH_L)
+            nvl,nvr = kn.getNormLRVelFinch(vl,vr)
+            f.wheels(nvl,nvr)
         elif obj==self.rotRButton:
-            f.wheels(0.3,-0.3)
+            omega=-2.5
+            vl,vr = kn.getLRVel(0, omega,kn.FINCH_L)
+            nvl,nvr = kn.getNormLRVelFinch(vl,vr)
+            f.wheels(nvl,nvr)
         
 
 

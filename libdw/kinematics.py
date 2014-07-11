@@ -1,7 +1,20 @@
+FINCH_MAX_SPEED = 0.381 # m/s
+FINCH_2L = 0.09 # m
+FINCH_L = FINCH_2L/2.0 # m
+
 def getLRVel(fwdVel, omega, l):
     vr = fwdVel + omega*l
     vl = fwdVel - omega*l
     return vl, vr
+
+def getNormLRVelFinch(vl,vr):
+    nvl=vl/FINCH_MAX_SPEED
+    nvr=vr/FINCH_MAX_SPEED
+    if nvl > 1.0:
+        nvl = 1.0
+    if nvr > 1.0:
+        nvr = 1.0
+    return nvl, nvr
 
 def getFwdVel(vl, vr):
     return (vl+vr)/2.0
